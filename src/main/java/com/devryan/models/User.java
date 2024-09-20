@@ -1,4 +1,4 @@
-package com.ryancode.models;
+package com.devryan.models;
 
 import jakarta.persistence.*;
 

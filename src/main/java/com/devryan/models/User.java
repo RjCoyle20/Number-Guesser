@@ -23,7 +23,7 @@ public class User {
     public User(Integer userid, String username, String password) {
         Userid = userid;
         this.username = username;
-        this.pwHash = pwHash;
+        this.pwHash = password;
     }
 
     public Integer getUserid() {

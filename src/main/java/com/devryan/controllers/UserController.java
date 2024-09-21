@@ -33,4 +33,6 @@ public class UserController {
 
     @PostMapping("/post")
     public User postUser(@RequestBody User user) {return userService.postUser(user);}
+
+    //TODO add Patch and Delete user methods
 }

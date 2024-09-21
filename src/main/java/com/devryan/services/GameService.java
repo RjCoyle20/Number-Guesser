@@ -18,4 +18,8 @@ public class GameService {
     public List<Game> getAllGames () { return gameRepository.findAll();}
 
     public Game getGameById(Integer id) { return gameRepository.findById(id).orElse(null); }
+
+    public Game postGame(Game game){
+        return gameRepository.save(game);
+    }
 }

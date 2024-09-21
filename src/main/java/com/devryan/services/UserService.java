@@ -2,12 +2,14 @@ package com.devryan.services;
 
 import com.devryan.data.UserRepository;
 import com.devryan.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
+    @Autowired
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -17,6 +19,6 @@ public class UserService {
     public User postUser (User user){
         return userRepository.save(user);
     }
-    public User getUserById(Integer id) { return userRepository.findById(id).orElse(null);}
+    public User getUserById(Long id) { return userRepository.findById(id).orElse(null);}
 
 }

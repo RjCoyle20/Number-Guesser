@@ -15,8 +15,6 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-//    @Autowired
-//    private UserRepository userRepository;
 
     private final UserService userService;
 
@@ -25,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/display/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Integer id){
+    public ResponseEntity<?> getUserById(@PathVariable Long id){
         User user = userService.getUserById(id);
         if (user == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(user);

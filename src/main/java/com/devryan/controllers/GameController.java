@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/game")
@@ -19,12 +20,12 @@ public class GameController {
     public GameController(GameService gameService) {
         this.gameService = gameService;
     }
-
-    @GetMapping("/all")
-    public List<Game> getAllGames() { return gameService.getAllGames(); }
+//TODO doubtful this will work, but getALl was also not working. Need to dive deeper into relational database set up.
+    @GetMapping("/all/{id}")
+    public Optional<Game> getAllGames(@PathVariable Long userId) { return gameService.getGamesById(userId); }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getGameById (@PathVariable Integer id){
+    public ResponseEntity<?> getGameById (@PathVariable Long id){
         Game game = gameService.getGameById(id);
         if(game == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(game);

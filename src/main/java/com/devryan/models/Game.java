@@ -7,24 +7,23 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-//    @ManyToOne
-//    @JoinColumn()
-//    private User user;
+    @ManyToOne
+    private User user;
 
-    private Integer kGuesses;
+    private Long kGuesses;
 
     //May not need this in backend.
-    private Integer targetNumber;
+    private Long targetNumber;
 
-    private Integer guessTotal;
+    private Long guessTotal;
 
     private boolean isSuccessful;
 
     public Game() {}
 
-    public Game(User user, Integer kGuesses, Integer targetNumber, Integer guessTotal, boolean isSuccessful) {
+    public Game(User user, Long kGuesses, Long targetNumber, Long guessTotal, boolean isSuccessful) {
 //        this.user = user;
         this.kGuesses = kGuesses;
         this.targetNumber = targetNumber;
@@ -32,11 +31,11 @@ public class Game {
         this.isSuccessful = isSuccessful;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -48,27 +47,27 @@ public class Game {
 //        this.user = user;
 //    }
 
-    public Integer getkGuesses() {
+    public Long getkGuesses() {
         return kGuesses;
     }
 
-    public void setkGuesses(Integer kGuesses) {
+    public void setkGuesses(Long kGuesses) {
         this.kGuesses = kGuesses;
     }
 
-    public Integer getTargetNumber() {
+    public Long getTargetNumber() {
         return targetNumber;
     }
 
-    public void setTargetNumber(Integer targetNumber) {
+    public void setTargetNumber(Long targetNumber) {
         this.targetNumber = targetNumber;
     }
 
-    public Integer getGuessTotal() {
+    public Long getGuessTotal() {
         return guessTotal;
     }
 
-    public void setGuessTotal(Integer guessTotal) {
+    public void setGuessTotal(Long guessTotal) {
         this.guessTotal = guessTotal;
     }
 

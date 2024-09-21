@@ -9,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Userid;
+    private Long Userid;
 
     private String username;
 
@@ -20,17 +20,17 @@ public class User {
     public User() {}
 
     //TODO replace pwHash with encoder
-    public User(Integer userid, String username, String password) {
+    public User(Long userid, String username, String password) {
         Userid = userid;
         this.username = username;
         this.pwHash = password;
     }
 
-    public Integer getUserid() {
+    public Long getUserid() {
         return Userid;
     }
 
-    public void setUserid(Integer userid) {
+    public void setUserid(Long userid) {
         Userid = userid;
     }
 

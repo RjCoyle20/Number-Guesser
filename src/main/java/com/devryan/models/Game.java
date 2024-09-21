@@ -9,9 +9,9 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn()
-    private User user;
+//    @ManyToOne
+//    @JoinColumn()
+//    private User user;
 
     private Integer kGuesses;
 
@@ -25,7 +25,7 @@ public class Game {
     public Game() {}
 
     public Game(User user, Integer kGuesses, Integer targetNumber, Integer guessTotal, boolean isSuccessful) {
-        this.user = user;
+//        this.user = user;
         this.kGuesses = kGuesses;
         this.targetNumber = targetNumber;
         this.guessTotal = guessTotal;
@@ -40,13 +40,13 @@ public class Game {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Integer getkGuesses() {
         return kGuesses;

@@ -7,7 +7,8 @@ import Select from '@mui/material/Select';
 export default function SelectAutoWidth() {
   const [guesses, setGuesses] = React.useState('');
 
-  const handleChange = (event) => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     setGuesses(event.target.value);
   };
 
@@ -19,7 +20,7 @@ export default function SelectAutoWidth() {
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={guesses}
-          onChange={handleChange}
+          onSubmit={handleSubmit}
           autoWidth
           label="Guesses"
         >

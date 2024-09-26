@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Appbar/>
-      hELLO THIS IS RYAN
+      Enter Number of Guesses
         <Routes>
         <Route path='/' element={<Numberbox/>}/>
         </Routes>

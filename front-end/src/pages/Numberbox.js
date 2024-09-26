@@ -1,46 +1,16 @@
 import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
-export default function SelectAutoWidth() {
-  const [guesses, setGuesses] = React.useState('');
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    setGuesses(event.target.value);
-  };
-
+export default function Numberbox() {
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Guesses</InputLabel>
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={guesses}
-          onSubmit={handleSubmit}
-          autoWidth
-          label="Guesses"
-        >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-          <MenuItem value={7}>7</MenuItem>
-          <MenuItem value={8}>8</MenuItem>
-          <MenuItem value={9}>9</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={11}>11</MenuItem>
-          <MenuItem value={12}>12</MenuItem>
-          <MenuItem value={13}>13</MenuItem>
-          <MenuItem value={14}>14</MenuItem>
-          <MenuItem value={15}>15</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
+    <Box
+      component="form"
+      sx={{ '& > :not(style)': { m: 1, width: '25ch', } }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField id="filled-basic" label="Filled" variant="outlined" />
+    </Box>
   );
 }

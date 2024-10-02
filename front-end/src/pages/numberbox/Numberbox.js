@@ -3,10 +3,15 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import './Numberbox.css';
 
 export default function Numberbox() {
   
   const [guesses, setGuesses] = useState ({guesses: 0})
+
+  const navigate = useNavigate();
+
   const handleInputChange = (event) => {
     const {name, value} = event.target
     setGuesses({
@@ -14,6 +19,7 @@ export default function Numberbox() {
       [name]: value
     })
     console.log(guesses)
+    navigate('/guessGame')
   };
 
   // const handleSubmit = async (e) => {
@@ -28,11 +34,9 @@ export default function Numberbox() {
   //   }
   // }
   return (
+    <>
+    <div className='center-form'>Enter Number of Guesses
     <Form onSubmit={handleInputChange}
-      component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch', } }}
-      noValidate
-      autoComplete="off"
     >
       <TextField id="filled-basic" label="Filled" variant="outlined" />
       <div>
@@ -41,5 +45,7 @@ export default function Numberbox() {
       </Button>
       </div>
     </Form>
+    </div>
+    </>
   );
 }

@@ -23,11 +23,13 @@ export default function Appbar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: "left" }}>
             Number Guesser
           </Typography>
-          <Button color='inherit' //as={Link} 
-          to="student" className='nav-link'>Login</Button>
+          <Button color='inherit' as={Link} 
+          to="/" className='nav-link'>New Game</Button>
+          <Button color='inherit' as={Link} 
+          to="/user/login" className='nav-link'>Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

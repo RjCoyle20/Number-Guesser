@@ -1,0 +1,15 @@
+.center-form {
+   
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 10%
+}
+
+.center-form Form {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+
+}

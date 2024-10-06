@@ -7,7 +7,7 @@ export default function GuessGame(props){
     const targetNumber = Math.floor(Math.random() * props.guesses)
     const [guessesRemaining, setGuessesRemaining] = useState(props.guesses);
     const [currentGuess, setCurrentGuess] = useState()
-    let message;
+    let message =  "Play the odds or go with your gut!"
 
     //TODO*******
     const handleSubmit = async (e) => {
@@ -40,9 +40,10 @@ export default function GuessGame(props){
         <h4>Total Guesses: {props.guesses}</h4>
         <h4>Guesses Remaining: {guessesRemaining}</h4>
         <h3>Guess a number between 1-100</h3>
-        <TextField id="filled-basic" label="Filled" variant="outlined" />
+        {message.charAt(0) == "Y" ? null :
+        <TextField id="filled-basic" label="Filled" variant="outlined" />}
         <div>
-            <Button variant='primary' type='submit' className='w-100' onSubmit={handleSubmit}>Submit</Button>
+        {message.charAt(0) == "Y" ? null : <Button variant='primary' type='submit' className='w-100' onSubmit={handleSubmit}>Submit</Button>}
         </div>
         <h2>{currentGuess}</h2>
         {message}

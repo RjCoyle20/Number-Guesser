@@ -5,22 +5,29 @@ import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import './Numberbox.css';
+import { BrowserRouter } from 'react-router-dom';
+import GuessGame from '../GuessGame';
+
 
 export default function Numberbox() {
   
-  const [guesses, setGuesses] = useState ({guesses: 0})
+  const [guesses, setGuesses] = useState ('')
 
   const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
-    const {name, value} = event.target
-    setGuesses({
-      ...guesses,
-      [name]: value
-    })
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setGuesses(event.target.value)
     console.log(guesses)
-    navigate('/guessGame')
+    // navigate('/guessGame')
   };
+
+  const handleChange = (event) => {
+    event.preventDefault();
+
+    setGuesses(event.target.value)
+    console.log(guesses);
+  }
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -36,17 +43,19 @@ export default function Numberbox() {
   return (
     <>
     <div className='center-form'>Enter Number of Guesses
-    <Form onSubmit={handleInputChange}
-    >
-      <TextField id="filled-basic" label="Filled" variant="outlined" />
+    <Form onSubmit={handleSubmit}>
+    
+      <input type='text' id="guesses" value={guesses} label="Guesses" variant="outlined" onChange={handleChange} />
       <div>
 
-      <Button variant='primary' type='submit' className='button'>
+      <Button variant='primary' type='submit' className='button' >
         Submit
       </Button>
       </div>
     </Form>
+    <GuessGame guesses = {guesses}/>
     </div>
     </>
+
   );
 }

@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 
 
 export default function GuessGame(props){
-    const targetNumber = Math.floor(Math.random() * props.guesses)
+    const targetNumber = Math.floor(Math.random() * 100)
     const [guessesRemaining, setGuessesRemaining] = useState(props.guesses);
     const [currentGuess, setCurrentGuess] = useState()
     let message =  "Play the odds or go with your gut!"

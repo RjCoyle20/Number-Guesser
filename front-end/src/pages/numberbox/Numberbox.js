@@ -12,12 +12,12 @@ import GuessGame from '../GuessGame';
 export default function Numberbox() {
   
   const [guesses, setGuesses] = useState ('')
-
+  const [submitted, setSubmitted] = useState(false)
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setGuesses(event.target.value)
+    setSubmitted(true);
     console.log(guesses)
     // navigate('/guessGame')
   };
@@ -45,15 +45,15 @@ export default function Numberbox() {
     <div className='center-form'>Enter Number of Guesses
     <Form onSubmit={handleSubmit}>
     
-      <input type='text' id="guesses" value={guesses} label="Guesses" variant="outlined" onChange={handleChange} />
+      <input type='text' id="guesses" value={guesses} label="Guesses" variant="outlined" onChange={handleChange} /><p>Number of guesses: {guesses}</p>
       <div>
 
       <Button variant='primary' type='submit' className='button' >
         Submit
       </Button>
       </div>
-    </Form>
-    <GuessGame guesses = {guesses}/>
+    </Form> 
+    {submitted == true ? <GuessGame guesses = {guesses}/> : null}
     </div>
     </>
 

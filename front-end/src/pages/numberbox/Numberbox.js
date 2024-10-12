@@ -19,14 +19,12 @@ export default function Numberbox() {
     event.preventDefault();
     setSubmitted(true);
     console.log(guesses)
-    // navigate('/guessGame')
+    navigate('/guessGame', {state: { guesses: guesses}} );
   };
 
   const handleChange = (event) => {
     event.preventDefault();
-
     setGuesses(event.target.value)
-    console.log(guesses);
   }
 
   // const handleSubmit = async (e) => {
@@ -53,7 +51,7 @@ export default function Numberbox() {
       </Button>
       </div>
     </Form> 
-    {submitted == true ? <GuessGame guesses = {guesses}/> : null}
+    {/* {submitted == true ? <GuessGame guesses = {guesses}/> : null} */}
     </div>
     </>
 

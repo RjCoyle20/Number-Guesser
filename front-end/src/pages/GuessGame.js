@@ -1,14 +1,18 @@
 import { TextField } from "@mui/material";
 import { useState } from "react"
 import { Button } from "react-bootstrap";
+import { useLocation } from "react-router";
 
 
 export default function GuessGame(props){
+    const {state} = useLocation();
+    const {guesses} = state // Read values passed on state
+
     const targetNumber = Math.floor(Math.random() * 100)
-    const [guessesRemaining, setGuessesRemaining] = useState(props.guesses);
+    const [guessesRemaining, setGuessesRemaining] = useState(guesses);
     const [currentGuess, setCurrentGuess] = useState()
     const [message, setMessage] =  useState("Play the odds or go with your gut!")
-
+    
     const handleChange = (event) => {
         setCurrentGuess(event.target.value);
     }
@@ -41,7 +45,7 @@ export default function GuessGame(props){
         <h1>
         Let's Play!
         </h1>
-        <h4>Total Guesses: {props.guesses}</h4>
+        <h4>Total Guesses: {guesses}</h4>
         <h4>Guesses Remaining: {guessesRemaining}</h4>
         <h3>Guess a number between 1-100</h3>
         {message.charAt(0) == "Y" ? null :

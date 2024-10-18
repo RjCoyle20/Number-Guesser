@@ -8,7 +8,7 @@ export default function GuessGame(props){
     const {state} = useLocation();
     const {guesses} = state // Read values passed on state
 
-    const targetNumber = Math.floor(Math.random() * 100)
+    const [targetNumber, setTargetNumber] = useState(Math.floor(Math.random() * 100));
     const [guessesRemaining, setGuessesRemaining] = useState(guesses);
     const [currentGuess, setCurrentGuess] = useState()
     const [message, setMessage] =  useState("Play the odds or go with your gut!")
@@ -48,6 +48,7 @@ export default function GuessGame(props){
         <h4>Total Guesses: {guesses}</h4>
         <h4>Guesses Remaining: {guessesRemaining}</h4>
         <h3>Guess a number between 1-100</h3>
+        <h4>The Target number is: {targetNumber}</h4>
         {message.charAt(0) == "Y" ? null :
         <TextField id="filled-basic" label="Filled" variant="outlined" value= {currentGuess} onChange={handleChange}/>}<p>The current guess is: {currentGuess}</p>
         <div>

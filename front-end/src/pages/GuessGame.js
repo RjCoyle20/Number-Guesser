@@ -24,13 +24,13 @@ export default function GuessGame(props){
             if (targetNumber == currentGuess) {
                 console.log("Correct guess!")
                 return( setMessage("Congrats! you have guesesed the number " + targetNumber))
-                } else if ( targetNumber > currentGuess && guessesRemaining != props.guesses) {
-                    message = "The number is greater than " + currentGuess;
-                    guessesRemaining--;
-                } else if (targetNumber < currentGuess && guessesRemaining != props.guesses ) {
-                    message = "The number is less than " + currentGuess;
-                    guessesRemaining--;
-                } else return (message = "CPU wins! You have exhausted " + props.guesses + " trials. The number was " + targetNumber);
+                } else if ( targetNumber > currentGuess && guessesRemaining != 1) {
+                    setMessage("The number is greater than " + currentGuess);
+                    setGuessesRemaining(guessesRemaining - 1 );
+                } else if (targetNumber < currentGuess && guessesRemaining != 1 ) {
+                    setMessage("The number is less than " + currentGuess);
+                    setGuessesRemaining(guessesRemaining - 1);
+                } else return (setMessage("CPU wins! You have exhausted " + guesses + " trials. The number was " + targetNumber));
             
         } catch (error) {
             

@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useState } from "react"
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useLocation } from "react-router";
 
 
@@ -22,14 +22,15 @@ export default function GuessGame(props){
         try { 
             console.log(guessesRemaining + " guesses remaining; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
             if (targetNumber == currentGuess) {
-                return(message = "Congrats! you have guesesed the number " + targetNumber)
+                console.log("Correct guess!")
+                return( setMessage("Congrats! you have guesesed the number " + targetNumber))
                 } else if ( targetNumber > currentGuess && guessesRemaining != props.guesses) {
                     message = "The number is greater than " + currentGuess;
                     guessesRemaining--;
                 } else if (targetNumber < currentGuess && guessesRemaining != props.guesses ) {
                     message = "The number is less than " + currentGuess;
                     guessesRemaining--;
-                } else return (message = "You have exhausted " + props.guesses + " trials. The number was " + targetNumber);
+                } else return (message = "CPU wins! You have exhausted " + props.guesses + " trials. The number was " + targetNumber);
             
         } catch (error) {
             
@@ -49,11 +50,14 @@ export default function GuessGame(props){
         <h4>Guesses Remaining: {guessesRemaining}</h4>
         <h3>Guess a number between 1-100</h3>
         <h4>The Target number is: {targetNumber}</h4>
-        {message.charAt(0) == "Y" ? null :
-        <TextField id="filled-basic" label="Filled" variant="outlined" value= {currentGuess} onChange={handleChange}/>}<p>The current guess is: {currentGuess}</p>
+        <Form onSubmit={handleSubmit}>
+        {/* If message begins with "T," display the input box and submit button. Otherwise, the game is over!" */}
+        {message.charAt(0) == "C" || "" ? null :
+        <input type="text" id="gameGuess" label="Guess" variant="outlined" value= {currentGuess} onChange={handleChange}/>}<p>The current guess is: {currentGuess}</p>
         <div>
-        {message.charAt(0) == "Y" ? null : <Button variant='primary' type='submit' className='w-100' onSubmit={handleSubmit}>Submit</Button>}
+        {message.charAt(0) == "C"  ? null : <Button variant='primary' type='submit' className='w-100' >Submit</Button>}
         </div>
+        </Form>
         <h2>{currentGuess}</h2>
         {message}
         </>

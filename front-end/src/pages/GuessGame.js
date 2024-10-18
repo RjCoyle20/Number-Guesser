@@ -16,7 +16,7 @@ export default function GuessGame(props){
     const handleChange = (event) => {
         setCurrentGuess(event.target.value);
     }
-    //TODO******* NEED TO USE HANDLE SUBMIT, NOT FOR LOOP
+   
     const handleSubmit = async (e) => {
         e.preventDefault();
         try { 
@@ -30,16 +30,15 @@ export default function GuessGame(props){
                 } else if (targetNumber < currentGuess && guessesRemaining != 1 ) {
                     setMessage("The number is less than " + currentGuess);
                     setGuessesRemaining(guessesRemaining - 1);
-                } else return (setMessage("CPU wins! You have exhausted " + guesses + " trials. The number was " + targetNumber));
-            
+                } else return (setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber), 
+                                setGuessesRemaining(guessesRemaining - 1));
+            //TODO Error handling.
         } catch (error) {
             
         }
     }
 
-    // for (let i = 0; i < props.guesses; i++){
-       
-    // } 
+    //TODO Save game info to user (after creating user).
 
     return(
         <>

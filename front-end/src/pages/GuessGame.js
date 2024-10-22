@@ -20,6 +20,12 @@ export default function GuessGame(props){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try { 
+            if( currentGuess > 100 || currentGuess <= 0){
+                throw new Error("Please enter a number between 1-100");
+            }
+            if(typeof currentGuess !== "number" || isNaN(currentGuess)){
+                throw new Error("That is not a number. Please enter a number between 1-100");
+            }
             console.log(guessesRemaining + " guesses remaining; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
             if (targetNumber == currentGuess) {
                 console.log("Correct guess!")
@@ -34,7 +40,8 @@ export default function GuessGame(props){
                                 setGuessesRemaining(guessesRemaining - 1));
             //TODO Error handling.
         } catch (error) {
-            
+            console.log("Error submiting guess " + currentGuess)
+            setMessage(error.message);
         }
     }
 

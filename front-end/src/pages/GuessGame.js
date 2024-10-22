@@ -20,7 +20,7 @@ export default function GuessGame(props){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try { 
-            if( currentGuess > 100 || currentGuess <= 0){
+            if(currentGuess > 100 || currentGuess <= 0){
                 throw new Error("Please enter a number between 1-100");
             }
             if(typeof currentGuess !== "number" || isNaN(currentGuess)){
@@ -38,7 +38,6 @@ export default function GuessGame(props){
                     setGuessesRemaining(guessesRemaining - 1);
                 } else return (setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber), 
                                 setGuessesRemaining(guessesRemaining - 1));
-            //TODO Error handling.
         } catch (error) {
             console.log("Error submiting guess " + currentGuess)
             setMessage(error.message);

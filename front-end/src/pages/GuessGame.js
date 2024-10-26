@@ -1,4 +1,3 @@
-import { TextField } from "@mui/material";
 import { useState } from "react"
 import { Button, Form } from "react-bootstrap";
 import { useLocation } from "react-router";
@@ -23,7 +22,7 @@ export default function GuessGame(props){
             if(currentGuess > 100 || currentGuess <= 0){
                 throw new Error("Please enter a number between 1-100");
             }
-            if(typeof currentGuess !== "number" || isNaN(currentGuess)){
+            if(isNaN(currentGuess)){
                 throw new Error("That is not a number. Please enter a number between 1-100");
             }
             console.log(guessesRemaining + " guesses remaining; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)

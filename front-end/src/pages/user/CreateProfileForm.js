@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 
 
@@ -8,18 +9,21 @@ export default function CreateProfileForm() {
     const [password, setPassword] = useState('');
     const [verifyPassword, setVerifyPassword] = useState('');
 
+    //manage error message 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const handleSubmit = async (event) => {
         event.preventDefault(); 
 
         const data = {
-            name: (event.target.name.value),
-            password: (event.target.password.value),
+            username: (event.target.username.value),
+            pwHash: (event.target.password.value),
             verifyPassword: (event.target.verifyPassword.value)
         }
         console.log(data)
 
         try{
-            const response = await fetch ("localhost:8080/user/post", {
+            const response = await fetch ("http://localhost:8080/user/post", {
                 method: 'POST', 
                 headers: {
                     "Content-Type" : "application/json"
@@ -31,6 +35,7 @@ export default function CreateProfileForm() {
             console.log(responseData);
 
         }catch (error) {
+
             console.error(error);
         }
     }
@@ -38,7 +43,45 @@ export default function CreateProfileForm() {
         <div>
             <form onSubmit={handleSubmit}>
                 <h3>Create a Profile to Track your Stats</h3>
+                {/* error message only displayes if present */}
+                {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+                <div>
+                    <h5>Username: </h5>
+
+                    <input 
+                    type="text" 
+                    autoComplete="off"
+                    id="username" 
+                    value={username} 
+                    onChange={(event) => setUsername(event.target.value)} 
+                    required minLength={2}/>
+                </div>
+                <div>
+                    <h5>Password: </h5>
+
+                    <input 
+                    type="text" 
+                    autoComplete="off"
+                    id="password" 
+                    value={password} 
+                    onChange={(event) => setPassword(event.target.value)} 
+                    required minLength={2}/>
+                </div>
+                <div>
+                    <h5>Verify Password: </h5>
+
+                    <input 
+                    type="text" 
+                    autoComplete="off"
+                    id="verifyPassword" 
+                    value={verifyPassword} 
+                    onChange={(event) => setVerifyPassword(event.target.value)} 
+                    required minLength={2}/>
+                </div>
+                <button type="submit">Submit</button>
             </form>
+
+            <p>Already Registered?<br /><a href="/user/login">Login</a></p>
         </div>
     )
 }

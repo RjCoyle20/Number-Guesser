@@ -11,7 +11,7 @@ export default function GuessGame(props){
     const [guessesRemaining, setGuessesRemaining] = useState(guesses);
     const [currentGuess, setCurrentGuess] = useState()
     const [message, setMessage] =  useState("Play the odds or go with your gut!")
-    
+    const [winStatus, setWinStatus] = useState(false)
     const handleChange = (event) => {
         setCurrentGuess(event.target.value);
     }
@@ -44,6 +44,7 @@ export default function GuessGame(props){
     }
 
     //TODO Save game info to user (after creating user).
+    
 
     return(
         <>

@@ -7,13 +7,14 @@ import GuessGame from './pages/GuessGame';
 import CreateProfileForm from './pages/user/CreateProfileForm';
 import Login from './pages/user/Login';
 
+
 function App() {
   return (
 
     <div className="App">
       <BrowserRouter>
       <Appbar/>
-      
+
         <Routes>
         <Route path='/' element={<Numberbox/>}/>
         <Route path='/guessGame' element={<GuessGame/>}/>

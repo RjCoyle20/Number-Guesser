@@ -1,8 +1,13 @@
 'use client'
 import { useState } from "react";
+import { useLocation } from "react-router";
 
 
 export default function CreateProfileForm() {
+
+    //Manage State variable
+    const {state} = useLocation();
+    // const {loggedIn} = state // Read values passed on state
 
     //Manage input values
     const [username, setUsername] = useState('');
@@ -39,6 +44,7 @@ export default function CreateProfileForm() {
             console.error(error);
         }
     }
+    //Why am I getting 404 in response to creating user?
     return(
         <div>
             <form onSubmit={handleSubmit}>

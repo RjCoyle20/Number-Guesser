@@ -39,7 +39,11 @@ export default function CreateProfileForm() {
             const responseData = await response.json();
             console.log(responseData);
 
-            document.cookie = "username=${username}";
+           Cookies.set('username', data.username, {
+            httpOnly: false,
+            path: '/',
+           });
+           console.log (Cookies.get('username'));
         }catch (error) {
 
             console.error(error);

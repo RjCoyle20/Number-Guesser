@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import { useLocation } from "react-router";
-
+import Cookies from 'js-cookie';
 
 export default function CreateProfileForm() {
 
@@ -39,6 +39,7 @@ export default function CreateProfileForm() {
             const responseData = await response.json();
             console.log(responseData);
 
+            document.cookie = "username=${username}";
         }catch (error) {
 
             console.error(error);

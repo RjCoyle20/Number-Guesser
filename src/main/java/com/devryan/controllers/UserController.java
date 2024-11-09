@@ -29,6 +29,10 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    //TODO Need to login somehow...
+    
+
+
     @PostMapping("/post")
     public User postUser(@RequestBody User user) {return userService.postUser(user);}
 

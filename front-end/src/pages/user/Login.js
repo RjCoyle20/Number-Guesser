@@ -17,16 +17,77 @@ export default function Login() {
     //manage error message
     const [errorMessage, setErrorMessage] = useState('');
 
+    //TODO build this next.
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const data = {
+            username: event.target.username.value,
+            password: event.target.password.value,
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                throw new Error ('Invalid login credentials.');
+            }
+            if (response.ok) {
+                console.log(data);
+                console.log(data.username);
+                console.log(response.headers);
+                console.log(response.headers.get('User-ID'));
+                Cookies.set('username', data.username, {
+                    httpOnly: false,
+                    path: '/',
+                   });
+                   
+                   //TODO find a way to route page to user's homepage once they log in.
+            }
+
+        } catch (error) {
+            setErrorMessage(error.message);
+            console.error('Login Error:', error);
+        }
     }
     
 
     return(
         <div>
             <form onSubmit={handleSubmit}>
+                <h3>Login</h3>
                 {/* error message only displays if present */}
                 {errorMessage && <div style={{color:'red'}}>{errorMessage}</div>}
+                <div>
+                    <h5>Username: </h5>
+
+                    <input 
+                    type="text" 
+                    autoComplete="off"
+                    id="username" 
+                    value={username} 
+                    onChange={(event) => setUsername(event.target.value)} 
+                    />
+                </div>
+                <div>
+                    <h5>Password: </h5>
+
+                    <input 
+                    type="text" 
+                    autoComplete="off"
+                    id="password" 
+                    value={password} 
+                    onChange={(event) => setPassword(event.target.value)} 
+                    />
+                </div>
+                <button type="submit">Submit</button>
+
+                <p>Or Create an Account <a href="/user/login/new">here</a></p>
             </form>
         </div>
     )

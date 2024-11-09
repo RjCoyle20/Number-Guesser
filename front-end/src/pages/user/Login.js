@@ -27,7 +27,7 @@ export default function Login() {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/", {
+            const response = await fetch("http://localhost:8080/user/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

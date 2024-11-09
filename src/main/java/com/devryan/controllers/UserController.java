@@ -46,7 +46,8 @@ public class UserController {
         System.out.println(user.getUsername());
 
         // Send user back to form if username does not exist OR if password hash doesn't match
-        if (theUser == null || !theUser.isMatchingPassword(password)){
+        //TODO replace .getPwHash().equals(password) with a password matcher once encoded.
+        if (theUser == null || !theUser.getPwHash().equals(password)){
             errors.rejectValue(
                     "password",
                     "login.invalid",

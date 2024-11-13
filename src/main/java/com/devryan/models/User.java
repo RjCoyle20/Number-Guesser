@@ -1,7 +1,7 @@
 package com.devryan.models;
 
 import jakarta.persistence.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.List;
 
 @Entity
@@ -13,7 +13,8 @@ public class User {
 
     private String username;
 
-    private String pwHash;
+    // TODO replace password with a secure password.
+    private String password;
     @OneToMany
     private List<Game> games;
 
@@ -22,7 +23,7 @@ public class User {
     public User(Long userid, String username, String password) {
         Userid = userid;
         this.username = username;
-        this.pwHash = encoder.encode(password);
+        this.password = password;
     }
 
     public Long getUserid() {
@@ -41,11 +42,10 @@ public class User {
         this.username = username;
     }
 
-    public String getPwHash() {
-        return pwHash;
+    public String getPassword() {
+        return password;
     }
 
-    private static final BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
-    public boolean isMatchingPassword(String password){ return encoder.matches(password,pwHash);}
+    public void setPassword(String password) {this.password = password;}
 
 }

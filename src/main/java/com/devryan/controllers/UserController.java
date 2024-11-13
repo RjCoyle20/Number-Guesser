@@ -41,13 +41,13 @@ public class UserController {
         User theUser = userService.getUserByName(user.getUsername());
 
         // Get the password the user supplied in the form
-        String password = user.getPwHash();
+        String password = user.getPassword();
 
         System.out.println(user.getUsername());
 
         // Send user back to form if username does not exist OR if password hash doesn't match
         //TODO replace .getPwHash().equals(password) with a password matcher once encoded.
-        if (theUser == null || !theUser.getPwHash().equals(password)){
+        if (theUser == null || !theUser.getPassword().equals(password)){
             errors.rejectValue(
                     "password",
                     "login.invalid",

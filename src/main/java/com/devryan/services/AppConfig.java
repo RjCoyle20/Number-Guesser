@@ -18,22 +18,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 
 @Configuration
-@EnableJpaRepositories
-@EnableWebSecurity
-public class AppConfig  {
+//@EnableJpaRepositories
+@EnableWebMvc
+public class AppConfig implements WebMvcConfigurer {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authz) -> authz
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults());
-        return http.build();
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer () {
-        return (web -> web.ignoring().antMatchers("/"))
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+
+        registry.addMapping("/api/**")
+                .allowedOrigins("https://domain2.com")
+                .allowedMethods("PUT", "DELETE");
     }
+
 }
-

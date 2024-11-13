@@ -1,6 +1,7 @@
 
 import Cookies from 'js-cookie';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -16,6 +17,8 @@ export default function Login() {
 
     //manage error message
     const [errorMessage, setErrorMessage] = useState('');
+
+    const navigate = useNavigate();
 
     //TODO build this next.
     const handleSubmit = async (event) => {
@@ -46,8 +49,14 @@ export default function Login() {
                     httpOnly: false,
                     path: '/',
                    });
-                   
+                   navigate('/')
                    //TODO find a way to route page to user's homepage once they log in.
+
+                // reset input values and error message upon successful submission
+                setUsername('');
+                setPassword('');
+                setErrorMessage('');
+
             }
 
         } catch (error) {

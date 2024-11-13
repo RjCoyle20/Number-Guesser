@@ -21,14 +21,20 @@ public class Game {
 
     private boolean isSuccessful;
 
+    private Long userId;
+
+    private String username;
+
     public Game() {}
 
-    public Game(User user, Long kGuesses, Long targetNumber, Long guessTotal, boolean isSuccessful) {
-//        this.user = user;
+    public Game(User user, Long kGuesses, Long targetNumber, Long guessTotal, boolean isSuccessful, Long userId, String username) {
+        this.user = user;
         this.kGuesses = kGuesses;
         this.targetNumber = targetNumber;
         this.guessTotal = guessTotal;
         this.isSuccessful = isSuccessful;
+        this.userId = userId;
+        this.username = username;
     }
 
     public Long getId() {
@@ -39,13 +45,13 @@ public class Game {
         this.id = id;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getkGuesses() {
         return kGuesses;
@@ -77,5 +83,21 @@ public class Game {
 
     public void setSuccessful(boolean successful) {
         isSuccessful = successful;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

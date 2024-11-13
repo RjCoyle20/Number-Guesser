@@ -1,9 +1,14 @@
 package com.devryan.controllers;
 
 import com.devryan.models.Game;
+import com.devryan.models.User;
 import com.devryan.services.GameService;
+import com.devryan.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +22,11 @@ public class GameController {
 
     private final GameService gameService;
 
-    public GameController(GameService gameService) {
+    private final UserService userService;
+
+    public GameController(GameService gameService, UserService userService) {
         this.gameService = gameService;
+        this.userService = userService;
     }
 //TODO doubtful this will work, but getALl was also not working. Need to dive deeper into relational database set up.
     @GetMapping("/all/{id}")
@@ -32,5 +40,14 @@ public class GameController {
     }
 
     @PostMapping("/post")
-    public Game postGame (@RequestBody Game game) { return gameService.postGame(game); }
+    public ResponseEntity<?> newGame (@RequestBody Game game, Errors errors, HttpServletRequest request) {
+
+        // Get username from Game, then get userId from Game service
+        User user = userService.getUserByName(game.getUsername());
+        Long userId = user.getUserid();
+
+        Game newGame = new Game(user, game.getkGuesses(), game.getTargetNumber(), game.getGuessTotal(),  game.isSuccessful(), user.getUserid(), game.getUsername());
+
+        gameService.postGame(game);
+        return new ResponseEntity<>(game, HttpStatus.OK); }
 }

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router";
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateProfileForm() {
 
@@ -16,6 +17,8 @@ export default function CreateProfileForm() {
 
     //manage error message 
     const [errorMessage, setErrorMessage] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault(); 
@@ -34,22 +37,42 @@ export default function CreateProfileForm() {
                     "Content-Type" : "application/json"
                 },
                 body: JSON.stringify(data),
-            })
+            });
+            //TODO build better profile creation requirements ie length requirements, duplicate usernames, passwords don't match
+            if (!response.ok){
+                throw new Error ('Invalid account creation')
+            }
+            if (response.ok){
+                console.log(data);
+                console.log(data.username);
+                console.log(response.headers);
+                console.log(response.headers.get('User-ID'));
+                Cookies.set('username', data.username, {
+                    httpOnly: false,
+                    path: '/'
+                });
+                navigate('/')
 
-            const responseData = await response.json();
-            console.log(responseData);
+            // reset input values and error message upon successful submission
+                setUsername('');
+                setPassword('');
+                setErrorMessage('');
+            }
+        //     const responseData = await response.json();
+        //     console.log(responseData);
 
-           Cookies.set('username', data.username, {
-            httpOnly: false,
-            path: '/',
-           });
+        //    Cookies.set('username', data.username, {
+        //     httpOnly: false,
+        //     path: '/',
+        //    });
            console.log (Cookies.get('username'));
+           
         }catch (error) {
-
-            console.error(error);
+            setErrorMessage(error.message);
+            console.error('Error:', error);
         }
     }
-    //Why am I getting 404 in response to creating user?
+
     return(
         <div>
             <form onSubmit={handleSubmit}>

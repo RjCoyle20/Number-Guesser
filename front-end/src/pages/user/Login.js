@@ -20,7 +20,6 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    //TODO build this next.
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -50,7 +49,6 @@ export default function Login() {
                     path: '/',
                    });
                    navigate('/')
-                   //TODO find a way to route page to user's homepage once they log in.
 
                 // reset input values and error message upon successful submission
                 setUsername('');

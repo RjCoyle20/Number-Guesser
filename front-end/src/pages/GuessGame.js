@@ -1,7 +1,12 @@
 import { useState } from "react"
 import { Button, Form } from "react-bootstrap";
 import { useLocation } from "react-router";
+import Cookies from 'js-cookie';
 
+//TODO get username from cookies
+//TODO set up Post method for saving game
+//Fix 404 response to creating profile
+//TODO build out Profile.js page
 
 export default function GuessGame(props){
     const {state} = useLocation();
@@ -11,7 +16,11 @@ export default function GuessGame(props){
     const [guessesRemaining, setGuessesRemaining] = useState(guesses);
     const [currentGuess, setCurrentGuess] = useState()
     const [message, setMessage] =  useState("Play the odds or go with your gut!")
-    const [winStatus, setWinStatus] = useState(false)
+    const [isSuccessful, setIsSuccessful] = useState(false)
+
+    const username = Cookies.get('username');
+
+
     const handleChange = (event) => {
         setCurrentGuess(event.target.value);
     }
@@ -28,7 +37,8 @@ export default function GuessGame(props){
             console.log(guessesRemaining + " guesses remaining; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
             if (targetNumber == currentGuess) {
                 console.log("Correct guess!")
-                return( setMessage("Congrats! you have guesesed the number " + targetNumber))
+                return( setMessage("Congrats! you have guesesed the number " + targetNumber),
+                        setIsSuccessful(true));
                 } else if ( targetNumber > currentGuess && guessesRemaining != 1) {
                     setMessage("The number is greater than " + currentGuess);
                     setGuessesRemaining(guessesRemaining - 1 );

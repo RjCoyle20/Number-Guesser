@@ -46,8 +46,8 @@ public class GameController {
         User user = userService.getUserByName(game.getUsername());
         Long userId = user.getUserid();
 
-        Game newGame = new Game(user, game.getkGuesses(), game.getTargetNumber(), game.getGuessTotal(),  game.isSuccessful(), user.getUserid(), game.getUsername());
+        Game newGame = new Game(user, game.getkGuesses(), game.getTargetNumber(), game.getGuessTotal(),  game.isSuccessful(), userId, game.getUsername());
 
-        gameService.postGame(game);
+        gameService.postGame(newGame);
         return new ResponseEntity<>(game, HttpStatus.OK); }
 }

@@ -22,14 +22,16 @@ export default function CreateProfileForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); 
-
+        
         const data = {
             username: (event.target.username.value),
             pwHash: (event.target.password.value),
             verifyPassword: (event.target.verifyPassword.value)
         }
         console.log(data)
-
+        if( password != verifyPassword){
+            setErrorMessage("Passwords must match");
+        } else{
         try{
             const response = await fetch ("http://localhost:8080/user/post", {
                 method: 'POST', 
@@ -38,11 +40,12 @@ export default function CreateProfileForm() {
                 },
                 body: JSON.stringify(data),
             });
-            //TODO build better profile creation requirements ie length requirements, duplicate usernames, passwords don't match
+
             if (!response.ok){
-                throw new Error ('Invalid account creation')
+                throw new Error ('User with this name already exists')
             }
             if (response.ok){
+
                 console.log(data);
                 console.log(data.username);
                 console.log(response.headers);
@@ -72,7 +75,7 @@ export default function CreateProfileForm() {
             console.error('Error:', error);
         }
     }
-
+    }
     return(
         <div>
             <form onSubmit={handleSubmit}>
@@ -88,7 +91,7 @@ export default function CreateProfileForm() {
                     id="username" 
                     value={username} 
                     onChange={(event) => setUsername(event.target.value)} 
-                    required minLength={2}/>
+                    required minLength={6}/>
                 </div>
                 <div>
                     <h5>Password: </h5>
@@ -99,7 +102,7 @@ export default function CreateProfileForm() {
                     id="password" 
                     value={password} 
                     onChange={(event) => setPassword(event.target.value)} 
-                    required minLength={2}/>
+                    required minLength={8}/>
                 </div>
                 <div>
                     <h5>Verify Password: </h5>
@@ -110,7 +113,7 @@ export default function CreateProfileForm() {
                     id="verifyPassword" 
                     value={verifyPassword} 
                     onChange={(event) => setVerifyPassword(event.target.value)} 
-                    required minLength={2}/>
+                    required minLength={8}/>
                 </div>
                 <button type="submit">Submit</button>
             </form>

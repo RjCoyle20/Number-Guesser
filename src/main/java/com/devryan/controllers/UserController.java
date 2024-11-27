@@ -3,6 +3,7 @@ package com.devryan.controllers;
 import com.devryan.data.UserRepository;
 import com.devryan.models.User;
 import com.devryan.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -67,7 +68,27 @@ public class UserController {
 
 
     @PostMapping("/post")
-    public User postUser(@RequestBody User user) {return userService.postUser(user);}
+    public ResponseEntity<?> postUser(@RequestBody User user, Errors errors) {
+
+        //Look up user in database using username they provided in the form
+        User existingUser = userService.getUserByName(user.getUsername());
+
+        //Send user back to form if username already exists
+        if (existingUser != null) {
+            errors.rejectValue("username", "username.alreadyExists", "A user with tha username already exists");
+            System.out.println("username already in use");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
+        } else {
+            //otherwise, save new user info in database
+            //TODO hash this password
+
+            User newUser = new User(user.getUsername(), user.getPassword());
+            userService.postUser(newUser);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+
+
+    }
 
     //TODO add Patch and Delete user methods
 }

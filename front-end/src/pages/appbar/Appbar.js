@@ -3,13 +3,16 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
+import { useState } from "react"
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import CheckForLoggedIn from '../user/CheckForLoggedIn';
 
 export default function Appbar() {
+
+  const areWeLoggedIn = <CheckForLoggedIn/>
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -29,7 +32,7 @@ export default function Appbar() {
           <Button color='inherit' as={Link} 
           to="/" className='nav-link'>New Game</Button>
           <Button color='inherit' as={Link} 
-          to="/user/login" className='nav-link'>Login</Button>
+          to={areWeLoggedIn ? "/user/logout" : "/user/login"} className='nav-link'>{ areWeLoggedIn ? "Logout" : "Login"}</Button>
         </Toolbar>
       </AppBar>
     </Box>

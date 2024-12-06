@@ -6,6 +6,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import GuessGame from './pages/GuessGame';
 import CreateProfileForm from './pages/user/CreateProfileForm';
 import Login from './pages/user/Login';
+import Logout from './pages/user/Logout';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/guessGame' element={<GuessGame/>}/>
         <Route path='/user/login' element={<Login/>}/>
         <Route path='/user/login/new' element={<CreateProfileForm/>}/>
+        <Route path='/user/logout' element={<Logout/>}/>
         </Routes>
         </BrowserRouter>
     </div>

@@ -8,11 +8,15 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import CheckForLoggedIn from '../user/CheckForLoggedIn';
+import Cookies from 'js-cookie';
 
 export default function Appbar() {
 
-  const areWeLoggedIn = <CheckForLoggedIn/>
+
+
+
+  const [usernameCookie, setUsernameCookie] = useState(Cookies.get('username'));
+  console.log("Are we logged in? " + usernameCookie)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -32,7 +36,7 @@ export default function Appbar() {
           <Button color='inherit' as={Link} 
           to="/" className='nav-link'>New Game</Button>
           <Button color='inherit' as={Link} 
-          to={areWeLoggedIn ? "/user/logout" : "/user/login"} className='nav-link'>{ areWeLoggedIn ? "Logout" : "Login"}</Button>
+          to={usernameCookie !== undefined ? "/user/logout" : "/user/login"} className='nav-link'>{ usernameCookie !== undefined ? "Logout" : "Login"}</Button>
         </Toolbar>
       </AppBar>
     </Box>

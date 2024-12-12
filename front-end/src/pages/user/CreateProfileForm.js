@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 export default function CreateProfileForm() {
 
     //Manage State variable
-    const {state} = useLocation();
+    // const {state} = useLocation();
     // const {loggedIn} = state // Read values passed on state
 
     //Manage input values
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [verifyPassword, setVerifyPassword] = useState('');
-
+  
     //manage error message 
     const [errorMessage, setErrorMessage] = useState('');
 

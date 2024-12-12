@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function Login() {
+export default function Login(usernameCookieGlobal) {
 
     //testing cookies
     const authToken = Cookies.get('username');
     console.log(authToken)
-
+    
     // manage input values
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -48,7 +48,7 @@ export default function Login() {
                     httpOnly: false,
                     path: '/',
                    });
-                   navigate('/')
+                   navigate('/') ;
 
                 // reset input values and error message upon successful submission
                 setUsername('');

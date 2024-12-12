@@ -5,12 +5,12 @@ import Cookies from 'js-cookie';
 
 //TODO get username from cookies
 //TODO set up Post method for saving game
-//Fix 404 response to creating profile
 //TODO build out Profile.js page
 
 export default function GuessGame(props){
     const {state} = useLocation();
     const {guesses} = state // Read values passed on state
+
 
     const [targetNumber, setTargetNumber] = useState(Math.floor(Math.random() * 100));
     const [guessesRemaining, setGuessesRemaining] = useState(guesses);

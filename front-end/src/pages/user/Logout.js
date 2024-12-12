@@ -2,8 +2,9 @@ import Cookies from 'js-cookie';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom'; 
 import { useState } from 'react';
+import Appbar from '../appbar/Appbar';
 
-export default function Logout () {
+export default function Logout (usernameCookieGlobal) {
 
     const[isConfirmed, setIsConfirmed] = useState(false);
 
@@ -21,7 +22,9 @@ export default function Logout () {
             const deletedCookie = Cookies.get('username');
             console.log("hopefully deleted username cookie =" + deletedCookie);
 
+            
             setIsConfirmed(true);
+            ;
 
         }
 

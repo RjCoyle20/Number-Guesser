@@ -14,7 +14,11 @@ import { useLocation } from "react-router";
 export default function Appbar({usernameCookieGlobal}) {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  
+  const [usernameCookie, setUsernameCookie] = useState(Cookies.get('username'));
+  const handleClick = (event) => {
+    setUsernameCookie(Cookies.get('username'));
+    setIsDrawerOpen(true)
+  }
 
   // const [usernameCookie, setUsernameCookie] = useState(Cookies.get('username'));
   // console.log("Are we logged in? " + usernameCookie)
@@ -28,7 +32,7 @@ export default function Appbar({usernameCookieGlobal}) {
             edge="start"
             color="inherit"
             aria-label="menu"
-            onClick={() => setIsDrawerOpen(true)}
+            onClick={ handleClick }
             sx={{ mr: 2 }}
           >
             <MenuIcon />
@@ -43,7 +47,7 @@ export default function Appbar({usernameCookieGlobal}) {
                   <ListItemText  primary="Play" />
                 </ListItem>
               </a>
-              <a href={usernameCookieGlobal== undefined ? "/user/login" : "/user"}>
+              <a href={usernameCookie== undefined ? "/user/login" : "/user"}>
                 <ListItem button>
                 <ListItemText primary="Profile"/>
                 </ListItem>
@@ -57,8 +61,6 @@ export default function Appbar({usernameCookieGlobal}) {
           </Drawer>
           <Button color='inherit' as={Link} 
           to="/" className='nav-link'>New Game</Button>
-          <Button color='inherit' as={Link} 
-          to={usernameCookieGlobal !== undefined ? "/user/logout" : "/user/login"} className='nav-link'>{ usernameCookieGlobal !== undefined ? "Logout" : "Login"}</Button>
         </Toolbar>
       </AppBar>
     </Box>

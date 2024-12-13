@@ -49,7 +49,7 @@ export default function Appbar({usernameCookieGlobal}) {
               </a>
               <a href={usernameCookie== undefined ? "/user/login" : "/user"}>
                 <ListItem button>
-                <ListItemText primary="Profile"/>
+                <ListItemText primary={usernameCookie== undefined ? "Login" : "Profile"} />
                 </ListItem>
               </a>  
               <a href='/user/logout'>

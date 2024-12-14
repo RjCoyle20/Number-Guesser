@@ -2,6 +2,7 @@ package com.devryan.controllers;
 
 import com.devryan.data.UserRepository;
 import com.devryan.models.User;
+import com.devryan.services.GameService;
 import com.devryan.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @CrossOrigin("*")
@@ -22,19 +24,23 @@ public class UserController {
 
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final GameService gameService;
+    public UserController(UserService userService, GameService gameService) {
         this.userService = userService;
+        this.gameService = gameService;
     }
 
-    @GetMapping("/display/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id){
-        User user = userService.getUserById(id);
+
+
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUserById(@PathVariable String username){
+        User user = userService.getUserByName(username);
         if (user == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(user);
+        Long userId = user.getUserid();
+        return new ResponseEntity<>(gameService.getGamesById(userId), HttpStatus.OK);
     }
 
-    //TODO Need to login somehow...
+
     @PostMapping("/")
     public ResponseEntity<?> processLoginForm(@RequestBody User user, Errors errors, HttpSession session){
 

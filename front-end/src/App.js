@@ -26,7 +26,7 @@ function App() {
         <Route path='/user/login/new' element={<CreateProfileForm />}/>
         <Route path='/user/logout' element={<Logout usernameCookieGlobal = {usernameCookieGlobal}/>}/>
         {/* May need to change path below to incorporate user's profile name, though not necessarily. */}
-        <Route path='/user' element={<Profile/>}/>
+        <Route path='/user' element={<Profile />}/>
         </Routes>
         </BrowserRouter>
     </div>

@@ -33,11 +33,10 @@ public class UserController {
 
 
     @GetMapping("/{username}")
-    public ResponseEntity<?> getUserById(@PathVariable String username){
+    public ResponseEntity<?> getGamesByUsername(@PathVariable String username){
         User user = userService.getUserByName(username);
         if (user == null) return ResponseEntity.notFound().build();
-        Long userId = user.getUserid();
-        return new ResponseEntity<>(gameService.getGamesById(userId), HttpStatus.OK);
+        return new ResponseEntity<>(gameService.getGamesById(username), HttpStatus.OK);
     }
 
 

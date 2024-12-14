@@ -19,7 +19,7 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public Optional<Game> getGamesById(Long userId) { return gameRepository.findById(userId);}
+    public List<Game> getGamesById(String username) { return gameRepository.findByUsername(username);}
 
     public Game getGameById(Long id) { return gameRepository.findById(id).orElse(null); }
 

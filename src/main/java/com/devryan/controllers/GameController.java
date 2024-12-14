@@ -29,15 +29,16 @@ public class GameController {
         this.userService = userService;
     }
 //TODO doubtful this will work, but getALl was also not working. Need to dive deeper into relational database set up.
-    @GetMapping("/all/{id}")
-    public Optional<Game> getAllGames(@PathVariable Long userId) { return gameService.getGamesById(userId); }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getGameById (@PathVariable Long id){
-        Game game = gameService.getGameById(id);
-        if(game == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(game);
-    }
+//    @GetMapping("/all/{id}")
+//    public Optional<Game> getAllGames(@PathVariable Long userId) { return gameService.getGamesById(userId); }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> getGameById (@PathVariable Long id){
+//        Game game = gameService.getGameById(id);
+//        if(game == null) return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(game);
+//    }
 
     @PostMapping("/post")
     public ResponseEntity<?> newGame (@RequestBody Game game, Errors errors, HttpServletRequest request) {

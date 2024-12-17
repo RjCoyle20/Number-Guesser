@@ -4,11 +4,12 @@ import { Table } from "react-bootstrap";
 
 export default function Profile(){
 
+    // Set username from cookies to display on profile page
     const authToken = Cookies.get('username');
 
     const [username, setUsername] = useState(authToken);
     const [games, setGames] = useState([]);
-    // Set username from cookies to display on profile page
+    
    
     console.log("username read: " + username);
 

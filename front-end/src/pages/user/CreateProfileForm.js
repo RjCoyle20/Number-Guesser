@@ -31,7 +31,12 @@ export default function CreateProfileForm() {
         console.log(data)
         if( password != verifyPassword){
             setErrorMessage("Passwords must match");
-        } else{
+        } else if (username.includes(' ') ) {
+            setErrorMessage("Username cannot include spaces")
+        } else if (password.includes(' ') ) {
+            setErrorMessage("Password cannot include spaces")
+        }
+            else{
         try{
             const response = await fetch ("http://localhost:8080/user/post", {
                 method: 'POST', 

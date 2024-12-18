@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-
 import Table from 'react-bootstrap/Table';
 import './Profile.css';
 
@@ -43,11 +42,11 @@ export default function Profile(){
     return(
         <div>
         <h1>{username}</h1>
-    
+        <br/><br/>
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th>Game ID</th>
+                    <th>#</th>
                     <th>Total Guesses</th>
                     <th>Guesses Used</th>
                     <th>Target Number</th>

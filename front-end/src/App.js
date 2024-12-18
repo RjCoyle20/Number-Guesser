@@ -9,7 +9,9 @@ import Login from './pages/user/Login';
 import Logout from './pages/user/Logout';
 import Cookies from 'js-cookie';
 import { useState } from "react"
-import Profile from './pages/user/Profile';
+import Profile from './pages/user/profile/Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [usernameCookieGlobal, setUsernameCookieGlobal] = useState(Cookies.get('username'));

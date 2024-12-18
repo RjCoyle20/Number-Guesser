@@ -1,0 +1,22 @@
+/* The outer container for centering the table */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    padding: 20px; /* Optional padding */
+  }
+  
+  /* Styling for the table */
+  .custom-table {
+    width: 80%; /* Takes up 80% of the page width */
+    max-width: 1200px; /* Limit the maximum width */
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual */
+  }
+  
+  /* Optional custom styles for table rows */
+  .custom-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  

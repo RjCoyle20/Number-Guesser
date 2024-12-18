@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-import { Table } from "react-bootstrap";
+
+import Table from 'react-bootstrap/Table';
+import './Profile.css';
+
 
 export default function Profile(){
 
@@ -40,6 +43,7 @@ export default function Profile(){
     return(
         <div>
         <h1>{username}</h1>
+    
         <Table striped bordered hover>
             <thead>
                 <tr>

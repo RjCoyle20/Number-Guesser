@@ -14,9 +14,10 @@ export default function GuessGame(props){
 
     const [targetNumber, setTargetNumber] = useState(Math.floor(Math.random() * 100));
     const [guessesCounter, setGuessesCounter] = useState(0);
-    const [currentGuess, setCurrentGuess] = useState()
-    const [message, setMessage] =  useState("Play the odds or go with your gut!")
-    const [isSuccessful, setIsSuccessful] = useState()
+    const [currentGuess, setCurrentGuess] = useState();
+    const [message, setMessage] =  useState("Play the odds or go with your gut!");
+    const [isSuccessful, setIsSuccessful] = useState();
+    const [isGameOver, setIsGameOver] = useState(false);
 
     const username = Cookies.get('username');
 
@@ -34,49 +35,52 @@ export default function GuessGame(props){
    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try { 
-            if(currentGuess > 100 || currentGuess <= 0){
-                throw new Error("Please enter a number between 1-100");
-            }
-            if(isNaN(currentGuess)){
-                throw new Error("That is not a number. Please enter a number between 1-100");
-            }
-            console.log(guessesCounter + " guesses made; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
-            if (targetNumber == currentGuess && guessesCounter == 0) {
-                console.log("Immaculate guess!")
-                return( setMessage("Congratulations! Immaculate guess! You guessed the number on the first try!"),
-                        setIsSuccessful(true));
-                } else if (targetNumber == currentGuess ) {
-                    console.log("Correct guess!")
-                    return( setMessage("Congrats! you have guesesed the number " + targetNumber),
-                            setIsSuccessful(true));
-                }  else if ( targetNumber > currentGuess && guessesCounter != guesses) {
-                    setMessage("The number is greater than " + currentGuess);
-                    setGuessesCounter(guessesCounter + 1 );
-                } else if (targetNumber < currentGuess && guessesCounter != guesses ) {
-                    setMessage("The number is less than " + currentGuess);
-                    setGuessesCounter(guessesCounter + 1);
-                } else return (setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber), 
-                                setGuessesCounter(guessesCounter + 1),
-                                setIsSuccessful(false));
-                      
-        } catch (error) {
-            console.log("Error submiting guess " + currentGuess)
-            setMessage(error.message);
+    
+            try { 
+                if(currentGuess > 100 || currentGuess <= 0){
+                    throw new Error("Please enter a number between 1-100");
+                }
+                if(isNaN(currentGuess)){
+                    throw new Error("That is not a number. Please enter a number between 1-100");
+                }
+                console.log(guessesCounter + " guesses made; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
+                if (targetNumber == currentGuess && guessesCounter == 0 && !isGameOver ) {
+                    console.log("Immaculate guess!")
+                    setIsGameOver(!isGameOver)
+                    setIsSuccessful(true)
+                    setMessage("Congratulations! Immaculate guess! You guessed the number on the first try!")
+                    setGuessesCounter(guessesCounter + 1 )
+                    console.log(isGameOver);
+                    } else if (targetNumber == currentGuess && !isGameOver) {
+                        console.log("Correct guess!")
+                        setMessage("Congrats! you have guesesed the number " + targetNumber)
+                        setIsSuccessful(true)
+                        setIsGameOver(!isGameOver);
+                    }  else if ( targetNumber > currentGuess && guessesCounter != guesses ) {
+                        setMessage("The number is greater than " + currentGuess);
+                        setGuessesCounter(guessesCounter + 1 );
+                    } else if (targetNumber < currentGuess && guessesCounter != guesses ) {
+                        setMessage("The number is less than " + currentGuess);
+                        setGuessesCounter(guessesCounter + 1);
+                    } else 
+                        setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber);
+                        setGuessesCounter(guessesCounter + 1);
+                        setIsSuccessful(false);
+                        setIsGameOver(!isGameOver);
+            } catch (error) {
+                console.log("Error submiting guess " + currentGuess)
+                setMessage(error.message);
         }
+            if(isGameOver)
+            {
 
-        if(isSuccessful == true || isSuccessful == false){
-            try {
                 console.log("Game data being sent back: " + gameData.guessesTotal + " <- total guesses" + gameData.kGuesses + " <- guesses used" + gameData.successful + " <- Successful?" + gameData.targetNumber + " <- Target number" + gameData.username + "<- username");
                 const response = await fetch("http://localhost:8080/game/post", {
                     method: "POST", 
                     headers: {"Content-Type" : "application/json"},
                     body: JSON.stringify(gameData)
                 })
-            } catch (error) {
-                console.log("Error submiting data to backend")
-                setMessage(error.message);
-            }
+
         }
     }
 

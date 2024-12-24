@@ -16,19 +16,20 @@ export default function GuessGame(props){
     const [guessesCounter, setGuessesCounter] = useState(0);
     const [currentGuess, setCurrentGuess] = useState();
     const [message, setMessage] =  useState("Play the odds or go with your gut!");
-    const [isSuccessful, setIsSuccessful] = useState();
+    const [isSuccessful, setIsSuccessful] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
 
     const username = Cookies.get('username');
 
     const [gameData, setGameData] = useState ({
         guessesTotal: guesses,
-        successful: isSuccessful,
-        kGuesses: guessesCounter,
+        successful: false,
+        kGuesses: 0,
         targetNumber: targetNumber,
         username: username
     })
 
+ 
     const handleChange = (event) => {
         setCurrentGuess(event.target.value);
     }
@@ -46,16 +47,17 @@ export default function GuessGame(props){
                 console.log(guessesCounter + " guesses made; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
                 if (targetNumber == currentGuess && guessesCounter == 0 && !isGameOver ) {
                     console.log("Immaculate guess!")
-                    setIsGameOver(!isGameOver)
-                    setIsSuccessful(true)
-                    setMessage("Congratulations! Immaculate guess! You guessed the number on the first try!")
-                    setGuessesCounter(guessesCounter + 1 )
+                    setIsGameOver(!isGameOver);
+                    setIsSuccessful(!isSuccessful);
+                    setMessage("Congratulations! Immaculate guess! You guessed the number on the first try!");
+                    setGuessesCounter(guessesCounter + 1 );
                     console.log(isGameOver);
                     } else if (targetNumber == currentGuess && !isGameOver) {
                         console.log("Correct guess!")
                         setMessage("Congrats! you have guesesed the number " + targetNumber)
-                        setIsSuccessful(true)
+                        setIsSuccessful(!isSuccessful)
                         setIsGameOver(!isGameOver);
+                        setGuessesCounter(guessesCounter + 1 );
                     }  else if ( targetNumber > currentGuess && guessesCounter != guesses ) {
                         setMessage("The number is greater than " + currentGuess);
                         setGuessesCounter(guessesCounter + 1 );
@@ -73,6 +75,9 @@ export default function GuessGame(props){
         }
             if(isGameOver)
             {
+                
+                gameData.successful = isSuccessful;
+                gameData.kGuesses = guessesCounter;
 
                 console.log("Game data being sent back: " + gameData.guessesTotal + " <- total guesses" + gameData.kGuesses + " <- guesses used" + gameData.successful + " <- Successful?" + gameData.targetNumber + " <- Target number" + gameData.username + "<- username");
                 const response = await fetch("http://localhost:8080/game/post", {
@@ -80,7 +85,6 @@ export default function GuessGame(props){
                     headers: {"Content-Type" : "application/json"},
                     body: JSON.stringify(gameData)
                 })
-
         }
     }
 

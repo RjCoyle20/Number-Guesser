@@ -23,8 +23,8 @@ export default function GuessGame(props){
 
     const [gameData, setGameData] = useState ({
         guessesTotal: guesses,
-        successful: false,
-        kGuesses: 0,
+        successful: isSuccessful,
+        kGuesses: guessesCounter,
         targetNumber: targetNumber,
         username: username
     })
@@ -44,31 +44,41 @@ export default function GuessGame(props){
                 if(isNaN(currentGuess)){
                     throw new Error("That is not a number. Please enter a number between 1-100");
                 }
-                console.log(guessesCounter + " guesses made; Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
+                // setGuessesCounter(guessesCounter + 1)
+                console.log(guessesCounter +1 + " guesses made out of " + guesses + " Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
+                console.log("is game over? " + isGameOver)
+
                 if (targetNumber == currentGuess && guessesCounter == 0 && !isGameOver ) {
                     console.log("Immaculate guess!")
-                    setIsGameOver(!isGameOver);
-                    setIsSuccessful(!isSuccessful);
+                    setIsGameOver((isGameOver) => !isGameOver)
+                    setIsSuccessful((isSuccessful) => !isSuccessful)
                     setMessage("Congratulations! Immaculate guess! You guessed the number on the first try!");
-                    setGuessesCounter(guessesCounter + 1 );
-                    console.log(isGameOver);
+                    setGuessesCounter(guessesCounter + 1 )
+                    console.log(isGameOver)
+                    console.log("is game over? " + isGameOver)
+                    console.log("is game successful? " + isSuccessful)
                     } else if (targetNumber == currentGuess && !isGameOver) {
                         console.log("Correct guess!")
                         setMessage("Congrats! you have guesesed the number " + targetNumber)
-                        setIsSuccessful(!isSuccessful)
-                        setIsGameOver(!isGameOver);
+                        setIsSuccessful((isSuccessful) => !isSuccessful)
+                        setIsGameOver((isGameOver) => !isGameOver)
+                        setGuessesCounter(guessesCounter + 1 )
+                        console.log("is game over? " + isGameOver)
+                        console.log("is game successful? " + isSuccessful)
+                    }  else if ( targetNumber > currentGuess && guessesCounter != guesses -1) {
+                        setMessage("The number is greater than " + currentGuess)
                         setGuessesCounter(guessesCounter + 1 );
-                    }  else if ( targetNumber > currentGuess && guessesCounter != guesses ) {
-                        setMessage("The number is greater than " + currentGuess);
-                        setGuessesCounter(guessesCounter + 1 );
-                    } else if (targetNumber < currentGuess && guessesCounter != guesses ) {
+                    } else if (targetNumber < currentGuess && guessesCounter != guesses -1 ) {
                         setMessage("The number is less than " + currentGuess);
                         setGuessesCounter(guessesCounter + 1);
-                    } else 
-                        setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber);
-                        setGuessesCounter(guessesCounter + 1);
-                        setIsSuccessful(false);
-                        setIsGameOver(!isGameOver);
+                    } else {
+                        setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber)
+                        setGuessesCounter(guessesCounter + 1)
+                        setIsSuccessful((isSuccessful) => !isSuccessful)
+                        setIsGameOver((isGameOver) => !isGameOver)
+                        console.log("is game over? " + isGameOver)
+                        console.log("is game successful? " + isSuccessful)
+                    }
             } catch (error) {
                 console.log("Error submiting guess " + currentGuess)
                 setMessage(error.message);

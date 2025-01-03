@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap";
 import { useLocation } from "react-router";
 import Cookies from 'js-cookie';
@@ -18,6 +18,8 @@ export default function GuessGame(props){
     const [message, setMessage] =  useState("Play the odds or go with your gut!");
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
+
+   
 
     const username = Cookies.get('username');
 
@@ -83,21 +85,39 @@ export default function GuessGame(props){
                 console.log("Error submiting guess " + currentGuess)
                 setMessage(error.message);
         }
+        
+        
             if(isGameOver)
             {
                 
-                gameData.successful = isSuccessful;
-                gameData.kGuesses = guessesCounter;
+                
+        }
+    }
+    useEffect(() => {
+        console.log("this is isSuccessful " + isSuccessful);
+        console.log("this is isGameOver " + isGameOver);
+        gameData.successful = isSuccessful;
+        gameData.kGuesses = guessesCounter;
 
-                console.log("Game data being sent back: " + gameData.guessesTotal + " <- total guesses" + gameData.kGuesses + " <- guesses used" + gameData.successful + " <- Successful?" + gameData.targetNumber + " <- Target number" + gameData.username + "<- username");
-                const response = await fetch("http://localhost:8080/game/post", {
+        const postData = async () => {
+            try{
+            console.log("Game data being sent back: " + gameData.guessesTotal + " <- total guesses " + gameData.kGuesses + " <- guesses used " + gameData.successful + " <- Successful?" + gameData.targetNumber + " <- Target number" + gameData.username + "<- username");
+            const response = await fetch("http://localhost:8080/game/post", {
                     method: "POST", 
                     headers: {"Content-Type" : "application/json"},
                     body: JSON.stringify(gameData)
                 })
-        }
-    }
 
+            } catch (error){
+                console.log('Error posting results', error);
+            }
+            
+    };
+    if(isGameOver){
+        postData();
+    } 
+}, [isGameOver]);
+    
     //TODO Save game info to user (after creating user).
     
 

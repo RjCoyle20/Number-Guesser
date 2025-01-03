@@ -49,7 +49,7 @@ export default function GuessGame(props){
                 // setGuessesCounter(guessesCounter + 1)
                 console.log(guessesCounter +1 + " guesses made out of " + guesses + " Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
                 console.log("is game over? " + isGameOver)
-
+                console.log("is game successful? " + isSuccessful)
                 if (targetNumber == currentGuess && guessesCounter == 0 && !isGameOver ) {
                     console.log("Immaculate guess!")
                     setIsGameOver((isGameOver) => !isGameOver)
@@ -76,7 +76,6 @@ export default function GuessGame(props){
                     } else {
                         setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber)
                         setGuessesCounter(guessesCounter + 1)
-                        setIsSuccessful((isSuccessful) => !isSuccessful)
                         setIsGameOver((isGameOver) => !isGameOver)
                         console.log("is game over? " + isGameOver)
                         console.log("is game successful? " + isSuccessful)

@@ -24,7 +24,7 @@ export default function GuessGame(props){
     const username = Cookies.get('username');
 
     const [gameData, setGameData] = useState ({
-        guessesTotal: guesses,
+        guessTotal: guesses,
         successful: isSuccessful,
         kGuesses: guessesCounter,
         targetNumber: targetNumber,
@@ -100,7 +100,7 @@ export default function GuessGame(props){
 
         const postData = async () => {
             try{
-            console.log("Game data being sent back: " + gameData.guessesTotal + " <- total guesses " + gameData.kGuesses + " <- guesses used " + gameData.successful + " <- Successful?" + gameData.targetNumber + " <- Target number" + gameData.username + "<- username");
+            console.log("Game data being sent back: " + gameData.guessTotal + " <- total guesses " + gameData.kGuesses + " <- guesses used " + gameData.successful + " <- Successful?" + gameData.targetNumber + " <- Target number" + gameData.username + "<- username");
             const response = await fetch("http://localhost:8080/game/post", {
                     method: "POST", 
                     headers: {"Content-Type" : "application/json"},

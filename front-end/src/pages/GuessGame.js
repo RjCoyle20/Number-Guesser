@@ -117,8 +117,7 @@ export default function GuessGame(props){
     } 
 }, [isGameOver]);
     
-    //TODO Save game info to user (after creating user).
-    
+ 
 
     return(
         <>

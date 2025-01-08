@@ -11,7 +11,7 @@ export default function Profile(){
 
     const [username, setUsername] = useState(authToken);
     const [games, setGames] = useState([]);
-    
+    const [id, setId] = useState(1);
    
     console.log("username read: " + username);
 
@@ -56,7 +56,7 @@ export default function Profile(){
             <tbody>
                 {games.map((game) => (
                     <tr key= {game.id}>
-                        <td>{game.id}</td>
+                        <td >{games.indexOf(game) +1 }</td>
                         <td>{game.guessTotal}</td>
                         <td>{game.kGuesses}</td>
                         <td>{game.targetNumber}</td>

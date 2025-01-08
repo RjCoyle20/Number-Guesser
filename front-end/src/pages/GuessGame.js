@@ -124,14 +124,15 @@ export default function GuessGame(props){
         <h1>
         Let's Play!
         </h1>
-        <h4>Total Guesses: {guesses}</h4>
-        <h4>Guesses Remaining: {guesses - guessesCounter}</h4>
+        <h5>Total Guesses: {guesses}</h5>
+        <h5>Guesses Remaining: {guesses - guessesCounter}</h5>
         <h3>Guess a number between 1-100</h3>
-        <h4>The Target number is: {targetNumber}</h4>
+        {/* <h4>The Target number is: {targetNumber}</h4> */}
         <Form onSubmit={handleSubmit}>
         {/* If message begins with "T," display the input box and submit button. Otherwise, the game is over!" */}
         {message.charAt(0) == "C" || "" ? null :
-        <input type="text" id="gameGuess" label="Guess" variant="outlined" value= {currentGuess} onChange={handleChange}/>}<p>The current guess is: {currentGuess}</p>
+        <input type="text" id="gameGuess" label="Guess" variant="outlined" value= {currentGuess} onChange={handleChange}/>}
+        {/* <p>The current guess is: {currentGuess}</p> */}
         <div>
         {message.charAt(0) == "C"  ? null : <Button variant='primary' type='submit'  >Submit</Button>}
         </div>

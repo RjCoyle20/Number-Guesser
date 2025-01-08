@@ -40,10 +40,13 @@ export default function Numberbox() {
   // }
   return (
     <>
-    <div className='center-form'>Enter Number of Guesses
+    <div className='center-form'>
+      <h2>Enter Number of Guesses</h2>
     <Form onSubmit={handleSubmit}>
     
-      <input type='text' id="guesses" value={guesses} label="Guesses" variant="outlined" onChange={handleChange} /><p>Number of guesses: {guesses}</p>
+      <input type='text' id="guesses" value={guesses} label="Guesses" variant="outlined" onChange={handleChange} />
+      
+      {/* <p>Number of guesses: {guesses}</p> */}
       <div>
 
       <Button variant='primary' type='submit' className='button' >

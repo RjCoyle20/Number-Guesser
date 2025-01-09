@@ -25,7 +25,7 @@ export default function Appbar({usernameCookieGlobal}) {
   console.log("Are we seeing the correct GLOBAL cookie? " + usernameCookieGlobal);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" className=''>
         <Toolbar >
           <IconButton
             size="large"

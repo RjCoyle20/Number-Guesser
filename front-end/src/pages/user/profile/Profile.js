@@ -43,6 +43,8 @@ export default function Profile(){
         <div>
         <h1>{username}</h1>
         <br/><br/>
+        <h3>Games Record</h3>
+        <br/><br/>
         <Table striped bordered hover>
             <thead>
                 <tr>

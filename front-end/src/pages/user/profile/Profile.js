@@ -38,7 +38,7 @@ export default function Profile(){
         fetchGames();
     }
     }, [username])
-
+ //TODO PASSWORD HASHER AND MAKE SURE NON-LOGGED IN PLAYERS' DATA ISN'T SENT BACK
     return(
         <div>
         <h1>{username}</h1>

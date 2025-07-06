@@ -18,6 +18,7 @@ export default function GuessGame(props){
     const [message, setMessage] =  useState("Play the odds or go with your gut!");
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [previousGuess, setPreviousGuess] = useState();
 
    
 
@@ -47,6 +48,9 @@ export default function GuessGame(props){
                     throw new Error("That is not a number. Please enter a number between 1-100");
                 }
                 // setGuessesCounter(guessesCounter + 1)
+                if (currentGuess == previousGuess){
+                    throw new Error ("No sense in guessing the same number twice");
+                }
                 console.log(guessesCounter +1 + " guesses made out of " + guesses + " Current number is :" + currentGuess + " Try to guess this number: " + targetNumber)
                 console.log("is game over? " + isGameOver)
                 console.log("is game successful? " + isSuccessful)
@@ -70,15 +74,18 @@ export default function GuessGame(props){
                     }  else if ( targetNumber > currentGuess && guessesCounter != guesses -1) {
                         setMessage("The number is greater than " + currentGuess)
                         setGuessesCounter(guessesCounter + 1 );
+                        setPreviousGuess(currentGuess);
                     } else if (targetNumber < currentGuess && guessesCounter != guesses -1 ) {
                         setMessage("The number is less than " + currentGuess);
                         setGuessesCounter(guessesCounter + 1);
+                        setPreviousGuess(currentGuess);
                     } else {
                         setMessage("CPU wins! You have exhausted all " + guesses + " trials. The number was " + targetNumber)
                         setGuessesCounter(guessesCounter + 1)
                         setIsGameOver((isGameOver) => !isGameOver)
                         console.log("is game over? " + isGameOver)
                         console.log("is game successful? " + isSuccessful)
+                        
                     }
             } catch (error) {
                 console.log("Error submiting guess " + currentGuess)
@@ -86,11 +93,6 @@ export default function GuessGame(props){
         }
         
         
-            if(isGameOver)
-            {
-                
-                
-        }
     }
     useEffect(() => {
         console.log("this is isSuccessful " + isSuccessful);

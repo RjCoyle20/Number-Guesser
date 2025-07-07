@@ -120,7 +120,6 @@ export default function GuessGame(props){
 }, [isGameOver]);
     
  
-
     return(
         <>
         <h1>

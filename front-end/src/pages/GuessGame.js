@@ -65,7 +65,7 @@ export default function GuessGame(props){
                     console.log("is game successful? " + isSuccessful)
                     } else if (targetNumber == currentGuess && !isGameOver) {
                         console.log("Correct guess!")
-                        setMessage("Congrats! you have guesesed the number " + targetNumber)
+                        setMessage("Congrats! you have guessed the number " + targetNumber)
                         setIsSuccessful((isSuccessful) => !isSuccessful)
                         setIsGameOver((isGameOver) => !isGameOver)
                         setGuessesCounter(guessesCounter + 1 )
